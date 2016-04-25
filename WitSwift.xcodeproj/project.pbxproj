@@ -1,0 +1,393 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B88325E81CCE6C5B00CA391E /* WitSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = B88325E71CCE6C5B00CA391E /* WitSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B88325EF1CCE6C5B00CA391E /* WitSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B88325E41CCE6C5B00CA391E /* WitSwift.framework */; };
+		B88325F41CCE6C5B00CA391E /* WitSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88325F31CCE6C5B00CA391E /* WitSwiftTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B88325F01CCE6C5B00CA391E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B88325DB1CCE6C5B00CA391E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B88325E31CCE6C5B00CA391E;
+			remoteInfo = WitSwift;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B88325E41CCE6C5B00CA391E /* WitSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WitSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B88325E71CCE6C5B00CA391E /* WitSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WitSwift.h; sourceTree = "<group>"; };
+		B88325E91CCE6C5B00CA391E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B88325EE1CCE6C5B00CA391E /* WitSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WitSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B88325F31CCE6C5B00CA391E /* WitSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WitSwiftTests.swift; sourceTree = "<group>"; };
+		B88325F51CCE6C5B00CA391E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B88325E01CCE6C5B00CA391E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B88325EB1CCE6C5B00CA391E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B88325EF1CCE6C5B00CA391E /* WitSwift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B88325DA1CCE6C5B00CA391E = {
+			isa = PBXGroup;
+			children = (
+				B88325E61CCE6C5B00CA391E /* WitSwift */,
+				B88325F21CCE6C5B00CA391E /* WitSwiftTests */,
+				B88325E51CCE6C5B00CA391E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B88325E51CCE6C5B00CA391E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B88325E41CCE6C5B00CA391E /* WitSwift.framework */,
+				B88325EE1CCE6C5B00CA391E /* WitSwiftTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B88325E61CCE6C5B00CA391E /* WitSwift */ = {
+			isa = PBXGroup;
+			children = (
+				B88325E71CCE6C5B00CA391E /* WitSwift.h */,
+				B88325E91CCE6C5B00CA391E /* Info.plist */,
+			);
+			path = WitSwift;
+			sourceTree = "<group>";
+		};
+		B88325F21CCE6C5B00CA391E /* WitSwiftTests */ = {
+			isa = PBXGroup;
+			children = (
+				B88325F31CCE6C5B00CA391E /* WitSwiftTests.swift */,
+				B88325F51CCE6C5B00CA391E /* Info.plist */,
+			);
+			path = WitSwiftTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		B88325E11CCE6C5B00CA391E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B88325E81CCE6C5B00CA391E /* WitSwift.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		B88325E31CCE6C5B00CA391E /* WitSwift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B88325F81CCE6C5B00CA391E /* Build configuration list for PBXNativeTarget "WitSwift" */;
+			buildPhases = (
+				B88325DF1CCE6C5B00CA391E /* Sources */,
+				B88325E01CCE6C5B00CA391E /* Frameworks */,
+				B88325E11CCE6C5B00CA391E /* Headers */,
+				B88325E21CCE6C5B00CA391E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WitSwift;
+			productName = WitSwift;
+			productReference = B88325E41CCE6C5B00CA391E /* WitSwift.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B88325ED1CCE6C5B00CA391E /* WitSwiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B88325FB1CCE6C5B00CA391E /* Build configuration list for PBXNativeTarget "WitSwiftTests" */;
+			buildPhases = (
+				B88325EA1CCE6C5B00CA391E /* Sources */,
+				B88325EB1CCE6C5B00CA391E /* Frameworks */,
+				B88325EC1CCE6C5B00CA391E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B88325F11CCE6C5B00CA391E /* PBXTargetDependency */,
+			);
+			name = WitSwiftTests;
+			productName = WitSwiftTests;
+			productReference = B88325EE1CCE6C5B00CA391E /* WitSwiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B88325DB1CCE6C5B00CA391E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Wenbin Zhang";
+				TargetAttributes = {
+					B88325E31CCE6C5B00CA391E = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					B88325ED1CCE6C5B00CA391E = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = B88325DE1CCE6C5B00CA391E /* Build configuration list for PBXProject "WitSwift" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B88325DA1CCE6C5B00CA391E;
+			productRefGroup = B88325E51CCE6C5B00CA391E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B88325E31CCE6C5B00CA391E /* WitSwift */,
+				B88325ED1CCE6C5B00CA391E /* WitSwiftTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B88325E21CCE6C5B00CA391E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B88325EC1CCE6C5B00CA391E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B88325DF1CCE6C5B00CA391E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B88325EA1CCE6C5B00CA391E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B88325F41CCE6C5B00CA391E /* WitSwiftTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B88325F11CCE6C5B00CA391E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B88325E31CCE6C5B00CA391E /* WitSwift */;
+			targetProxy = B88325F01CCE6C5B00CA391E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		B88325F61CCE6C5B00CA391E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B88325F71CCE6C5B00CA391E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B88325F91CCE6C5B00CA391E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = WitSwift/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jasonhotsauce.WitSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		B88325FA1CCE6C5B00CA391E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = WitSwift/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jasonhotsauce.WitSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		B88325FC1CCE6C5B00CA391E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = WitSwiftTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jasonhotsauce.WitSwiftTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B88325FD1CCE6C5B00CA391E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = WitSwiftTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jasonhotsauce.WitSwiftTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B88325DE1CCE6C5B00CA391E /* Build configuration list for PBXProject "WitSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B88325F61CCE6C5B00CA391E /* Debug */,
+				B88325F71CCE6C5B00CA391E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B88325F81CCE6C5B00CA391E /* Build configuration list for PBXNativeTarget "WitSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B88325F91CCE6C5B00CA391E /* Debug */,
+				B88325FA1CCE6C5B00CA391E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		B88325FB1CCE6C5B00CA391E /* Build configuration list for PBXNativeTarget "WitSwiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B88325FC1CCE6C5B00CA391E /* Debug */,
+				B88325FD1CCE6C5B00CA391E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B88325DB1CCE6C5B00CA391E /* Project object */;
+}
