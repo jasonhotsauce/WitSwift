@@ -10,6 +10,16 @@
 		B88325E81CCE6C5B00CA391E /* WitSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = B88325E71CCE6C5B00CA391E /* WitSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B88325EF1CCE6C5B00CA391E /* WitSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B88325E41CCE6C5B00CA391E /* WitSwift.framework */; };
 		B88325F41CCE6C5B00CA391E /* WitSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88325F31CCE6C5B00CA391E /* WitSwiftTests.swift */; };
+		B88325FF1CCE6C6D00CA391E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88325FE1CCE6C6D00CA391E /* NetworkManager.swift */; };
+		B88326031CCE6E9500CA391E /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88326021CCE6E9500CA391E /* Configuration.swift */; };
+		B88326051CCFB7CD00CA391E /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88326041CCFB7CD00CA391E /* Context.swift */; };
+		B88326071CCFBBD700CA391E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88326061CCFBBD700CA391E /* Message.swift */; };
+		B88326091CD10E1700CA391E /* NetworkDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88326081CD10E1700CA391E /* NetworkDelegate.swift */; };
+		B883260B1CD1144400CA391E /* Wit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B883260A1CD1144400CA391E /* Wit.swift */; };
+		B88326111CD3AD8000CA391E /* JSONConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88326101CD3AD8000CA391E /* JSONConvertable.swift */; };
+		B88326141CD69F0300CA391E /* JSONConvertTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88326131CD69F0300CA391E /* JSONConvertTests.swift */; };
+		B88326161CD8EEAD00CA391E /* JSONDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88326151CD8EEAD00CA391E /* JSONDecodable.swift */; };
+		B88326181CDBC9DD00CA391E /* JSONTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88326171CDBC9DD00CA391E /* JSONTransformer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +39,16 @@
 		B88325EE1CCE6C5B00CA391E /* WitSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WitSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B88325F31CCE6C5B00CA391E /* WitSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WitSwiftTests.swift; sourceTree = "<group>"; };
 		B88325F51CCE6C5B00CA391E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B88325FE1CCE6C6D00CA391E /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		B88326021CCE6E9500CA391E /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		B88326041CCFB7CD00CA391E /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
+		B88326061CCFBBD700CA391E /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		B88326081CD10E1700CA391E /* NetworkDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDelegate.swift; sourceTree = "<group>"; };
+		B883260A1CD1144400CA391E /* Wit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wit.swift; sourceTree = "<group>"; };
+		B88326101CD3AD8000CA391E /* JSONConvertable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONConvertable.swift; sourceTree = "<group>"; };
+		B88326131CD69F0300CA391E /* JSONConvertTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONConvertTests.swift; sourceTree = "<group>"; };
+		B88326151CD8EEAD00CA391E /* JSONDecodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONDecodable.swift; sourceTree = "<group>"; };
+		B88326171CDBC9DD00CA391E /* JSONTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONTransformer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +92,16 @@
 			isa = PBXGroup;
 			children = (
 				B88325E71CCE6C5B00CA391E /* WitSwift.h */,
+				B883260A1CD1144400CA391E /* Wit.swift */,
 				B88325E91CCE6C5B00CA391E /* Info.plist */,
+				B88325FE1CCE6C6D00CA391E /* NetworkManager.swift */,
+				B88326081CD10E1700CA391E /* NetworkDelegate.swift */,
+				B88326021CCE6E9500CA391E /* Configuration.swift */,
+				B88326041CCFB7CD00CA391E /* Context.swift */,
+				B88326101CD3AD8000CA391E /* JSONConvertable.swift */,
+				B88326151CD8EEAD00CA391E /* JSONDecodable.swift */,
+				B88326171CDBC9DD00CA391E /* JSONTransformer.swift */,
+				B88326061CCFBBD700CA391E /* Message.swift */,
 			);
 			path = WitSwift;
 			sourceTree = "<group>";
@@ -82,6 +111,7 @@
 			children = (
 				B88325F31CCE6C5B00CA391E /* WitSwiftTests.swift */,
 				B88325F51CCE6C5B00CA391E /* Info.plist */,
+				B88326131CD69F0300CA391E /* JSONConvertTests.swift */,
 			);
 			path = WitSwiftTests;
 			sourceTree = "<group>";
@@ -194,6 +224,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B883260B1CD1144400CA391E /* Wit.swift in Sources */,
+				B88326031CCE6E9500CA391E /* Configuration.swift in Sources */,
+				B88326181CDBC9DD00CA391E /* JSONTransformer.swift in Sources */,
+				B88326051CCFB7CD00CA391E /* Context.swift in Sources */,
+				B88326071CCFBBD700CA391E /* Message.swift in Sources */,
+				B88326091CD10E1700CA391E /* NetworkDelegate.swift in Sources */,
+				B88326111CD3AD8000CA391E /* JSONConvertable.swift in Sources */,
+				B88326161CD8EEAD00CA391E /* JSONDecodable.swift in Sources */,
+				B88325FF1CCE6C6D00CA391E /* NetworkManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B88325F41CCE6C5B00CA391E /* WitSwiftTests.swift in Sources */,
+				B88326141CD69F0300CA391E /* JSONConvertTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +350,7 @@
 		B88325F91CCE6C5B00CA391E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -320,12 +361,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jasonhotsauce.WitSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		B88325FA1CCE6C5B00CA391E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -378,6 +421,7 @@
 				B88325FA1CCE6C5B00CA391E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B88325FB1CCE6C5B00CA391E /* Build configuration list for PBXNativeTarget "WitSwiftTests" */ = {
 			isa = XCConfigurationList;
@@ -386,6 +430,7 @@
 				B88325FD1CCE6C5B00CA391E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
