@@ -17,7 +17,7 @@ enum JSONDecodingError: ErrorType {
     case ValueNotTransformable(value: Any)
 
     func toNSError() -> NSError {
-        let domain = "ai.wit.jsonerror"
+        let domain = "ai.wit.json.decodeError"
         switch self {
         case .ArrayNotDecodable(let elementType):
             return NSError(domain: domain, code: 1, userInfo: ["elementType": String(elementType)])

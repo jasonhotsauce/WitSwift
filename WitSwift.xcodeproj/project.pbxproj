@@ -20,6 +20,7 @@
 		B88326141CD69F0300CA391E /* JSONConvertTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88326131CD69F0300CA391E /* JSONConvertTests.swift */; };
 		B88326161CD8EEAD00CA391E /* JSONDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88326151CD8EEAD00CA391E /* JSONDecodable.swift */; };
 		B88326181CDBC9DD00CA391E /* JSONTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88326171CDBC9DD00CA391E /* JSONTransformer.swift */; };
+		B894FEE51CFC8EA400BAF024 /* Converse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B894FEE41CFC8EA400BAF024 /* Converse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		B88326131CD69F0300CA391E /* JSONConvertTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONConvertTests.swift; sourceTree = "<group>"; };
 		B88326151CD8EEAD00CA391E /* JSONDecodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONDecodable.swift; sourceTree = "<group>"; };
 		B88326171CDBC9DD00CA391E /* JSONTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONTransformer.swift; sourceTree = "<group>"; };
+		B894FEE41CFC8EA400BAF024 /* Converse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Converse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				B88326151CD8EEAD00CA391E /* JSONDecodable.swift */,
 				B88326171CDBC9DD00CA391E /* JSONTransformer.swift */,
 				B88326061CCFBBD700CA391E /* Message.swift */,
+				B894FEE41CFC8EA400BAF024 /* Converse.swift */,
 			);
 			path = WitSwift;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B894FEE51CFC8EA400BAF024 /* Converse.swift in Sources */,
 				B883260B1CD1144400CA391E /* Wit.swift in Sources */,
 				B88326031CCE6E9500CA391E /* Configuration.swift in Sources */,
 				B88326181CDBC9DD00CA391E /* JSONTransformer.swift in Sources */,

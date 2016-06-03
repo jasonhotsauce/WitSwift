@@ -12,6 +12,18 @@ enum JSONEncodingError: ErrorType {
     case ArrayIncompatible(elementType: Any.Type)
     case DictionaryIncompatible(elementType: Any.Type)
     case PropertyIncompatibleType(key: String, elementType: Any.Type)
+
+    func toNSError() -> NSError {
+        let domain = "ai.wit.json.encodingError"
+        switch self {
+        case .ArrayIncompatible(let elementType):
+            return NSError(domain: domain, code: 1, userInfo: ["elementType": String(elementType)])
+        case .DictionaryIncompatible(let elementType):
+            return NSError(domain: domain, code: 2, userInfo: ["elementType": String(elementType)])
+        case .PropertyIncompatibleType(let key, let elementType):
+            return NSError(domain: domain, code: 3, userInfo: ["key": key, "elementType": String(elementType)])
+        }
+    }
 }
 
 public protocol JSONConvertable {

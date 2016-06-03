@@ -31,7 +31,7 @@ internal class NetworkDelegate: NSObject, NSURLSessionDataDelegate {
         super.init()
     }
 
-    //MARK # Network delegates
+    //MARK # Network delegate
     func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) {
         if let taskDelegate = self[dataTask] {
             taskDelegate.URLSession(session, dataTask: dataTask, didReceiveData: data)
