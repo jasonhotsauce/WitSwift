@@ -23,7 +23,7 @@ public protocol Contextable : JSONConvertable {
     var referenceTime : NSDate? {get}
     var timezone: String? {get}
     var location: LocationLike? {get}
-    var entities: [EntityLike]? {get}
+    var entities: [EntityLike]? {get set}
 }
 
 internal struct Context: Contextable {
@@ -44,7 +44,5 @@ internal struct Context: Contextable {
         return nil
     }
 
-    var entities: [EntityLike]? {
-        return nil
-    }
+    var entities: [EntityLike]?
 }

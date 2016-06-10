@@ -25,20 +25,20 @@ public typealias RequestCompletion = (Bool, Message?, NSError?) -> Void
 
 public func getIntent(configuration: Configurable, query: String, context: Contextable = Context(), messageID: String?, threadID: String?, numberOfOutcome outcome: Int = 1, completion: RequestCompletion?) {
     let path = "/message"
-    var param = [String: Any]()
-    param["q"] = query
+    var params = [String: AnyObject]()
+    params["q"] = query
     if let msgID = messageID {
-        param["msg_id"] = msgID
+        params["msg_id"] = msgID
     }
     if let notNilThreadID = threadID {
-        param["thread_id"] = notNilThreadID
+        params["thread_id"] = notNilThreadID
     }
-    param["n"] = outcome
+    params["n"] = outcome
     do {
         let contextDictionary = try context.toJSON()
-        param["context"] = contextDictionary
-        param["v"] = configuration.version
-        NetworkManager.sharedInstance.execute(path, method: .Get, param: param, configuration: configuration, completion: { (task, response, error) in
+        params["context"] = contextDictionary
+        params["v"] = configuration.version
+        NetworkManager.sharedInstance.execute(path, method: .Get, params: params, configuration: configuration, completion: { (task, response, error) in
             if let notNilError = error {
                 completion?(false, nil, notNilError)
             } else {
@@ -97,15 +97,18 @@ public func getConverse(configuration: Configurable, query: String?, sessionID: 
         return
     }
     let path = "/converse"
-    var param = [String: Any]()
+    var params = [String: AnyObject]()
     if let notNilQuery = query {
-        param["q"] = notNilQuery
+        params["q"] = notNilQuery
     }
-    param["sessionID"] = sessionID
+    params["session_id"] = sessionID
     do {
+        print("start")
         let contextDictionary = try context.toJSON()
-        param["context"] = contextDictionary
-        NetworkManager.sharedInstance.execute(path, method: .Post, param: param, configuration: configuration, completion: { (task, responseData, error) in
+        params["context"] = contextDictionary
+        print(params)
+        NetworkManager.sharedInstance.execute(path, method: .Post, params: params, configuration: configuration, completion: { (task, responseData, error) in
+            print("Running converse")
             if let responseError = error {
                 requestErrorHandler?(responseError)
             } else {
@@ -116,6 +119,7 @@ public func getConverse(configuration: Configurable, query: String?, sessionID: 
                     guard let jsonResponse = try responseToJSON(validResponse) else {
                         return
                     }
+                    print(jsonResponse)
                     let converse = try Converse.init(json: jsonResponse)
                     if converse.type == .Stop {
                         return

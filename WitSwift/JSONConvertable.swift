@@ -103,6 +103,16 @@ public extension JSONPrimaryType {
     }
 }
 
+internal protocol JSONOptional {
+    var unwrapped: Any? {get}
+}
+
+extension Optional : JSONOptional {
+    var unwrapped : Any? {
+        return self
+    }
+}
+
 extension String:JSONPrimaryType {}
 extension Int: JSONPrimaryType {}
 extension Float: JSONPrimaryType {}
@@ -149,7 +159,14 @@ public extension JSONConvertable {
             guard let key = keyMaybe else {
                 continue
             }
-            switch valueMaybe {
+            var theValue = valueMaybe
+            if let val = valueMaybe as? JSONOptional {
+                guard let notNilValue = val.unwrapped else {
+                    continue
+                }
+                theValue = notNilValue
+            }
+            switch theValue {
             case let value as JSONConvertable:
                 dic[key] = try value.toJSON()
             case let value as JSONArray:
