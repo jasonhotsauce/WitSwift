@@ -103,12 +103,9 @@ public func getConverse(configuration: Configurable, query: String?, sessionID: 
     }
     params["session_id"] = sessionID
     do {
-        print("start")
         let contextDictionary = try context.toJSON()
         params["context"] = contextDictionary
-        print(params)
         NetworkManager.sharedInstance.execute(path, method: .Post, params: params, configuration: configuration, completion: { (task, responseData, error) in
-            print("Running converse")
             if let responseError = error {
                 requestErrorHandler?(responseError)
             } else {
@@ -119,7 +116,6 @@ public func getConverse(configuration: Configurable, query: String?, sessionID: 
                     guard let jsonResponse = try responseToJSON(validResponse) else {
                         return
                     }
-                    print(jsonResponse)
                     let converse = try Converse.init(json: jsonResponse)
                     if converse.type == .Stop {
                         return

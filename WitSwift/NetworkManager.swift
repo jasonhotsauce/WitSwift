@@ -57,7 +57,6 @@ internal final class NetworkManager: NSObject, NSURLSessionTaskDelegate {
         }
 
         let request = NSURLRequest.constructRequest(url, method: method, params: params, token: configuration.token)
-        print(request.allHTTPHeaderFields)
         let task = session.dataTaskWithRequest(request)
         delegate[task] = TaskDelegate(task: task, completion: completion)
         task.resume()
