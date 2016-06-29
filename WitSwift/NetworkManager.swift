@@ -49,7 +49,7 @@ internal final class NetworkManager: NSObject, NSURLSessionTaskDelegate {
         session = NSURLSession(configuration: configuration, delegate: delegate, delegateQueue: nil)
     }
 
-    func execute(urlPath: String, method: HTTPRequestMethod, params: [String: AnyObject]?, configuration: Configurable, completion: (( NSURLSessionTask?, NSData?, NSError?) ->Void)?)
+    func execute(urlPath: String, HTTPMethod method: HTTPRequestMethod, params: [String: AnyObject]?, configuration: Configurable, completion: (( NSURLSessionTask?, NSData?, NSError?) ->Void)?)
     {
         guard let url = NSURL(string: urlPath, relativeToURL: baseURL) else {
             completion?(nil, nil, nil)

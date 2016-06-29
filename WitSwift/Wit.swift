@@ -38,7 +38,7 @@ public func getIntent(configuration: Configurable, query: String, context: Conte
         let contextDictionary = try context.toJSON()
         params["context"] = contextDictionary
         params["v"] = configuration.version
-        NetworkManager.sharedInstance.execute(path, method: .Get, params: params, configuration: configuration, completion: { (task, response, error) in
+        NetworkManager.sharedInstance.execute(path, HTTPMethod: .Get, params: params, configuration: configuration, completion: { (task, response, error) in
             if let notNilError = error {
                 completion?(false, nil, notNilError)
             } else {
@@ -47,7 +47,7 @@ public func getIntent(configuration: Configurable, query: String, context: Conte
                     return
                 }
                 do {
-                    guard let jsonResponse = try responseToJSON(notNilResponse) else {
+                    guard let jsonResponse = try notNilResponse.toJson() else {
                         return
                     }
 
@@ -105,7 +105,7 @@ public func getConverse(configuration: Configurable, query: String?, sessionID: 
     do {
         let contextDictionary = try context.toJSON()
         params["context"] = contextDictionary
-        NetworkManager.sharedInstance.execute(path, method: .Post, params: params, configuration: configuration, completion: { (task, responseData, error) in
+        NetworkManager.sharedInstance.execute(path, HTTPMethod: .Post, params: params, configuration: configuration, completion: { (task, responseData, error) in
             if let responseError = error {
                 requestErrorHandler?(responseError)
             } else {
@@ -113,7 +113,7 @@ public func getConverse(configuration: Configurable, query: String?, sessionID: 
                     return
                 }
                 do {
-                    guard let jsonResponse = try responseToJSON(validResponse) else {
+                    guard let jsonResponse = try validResponse.toJson() else {
                         return
                     }
                     let converse = try Converse.init(json: jsonResponse)
@@ -148,10 +148,12 @@ public func getConverse(configuration: Configurable, query: String?, sessionID: 
     }
 }
 
-private func responseToJSON(response: NSData) throws -> JSON? {
-    let responseDictionary = try NSJSONSerialization.JSONObjectWithData(response, options: .AllowFragments)
-    guard let jsonResponse = responseDictionary as? JSON else {
-        throw WitError.NotValidResponse(response: responseDictionary)
+extension NSData {
+    func toJson() throws -> JSON? {
+        let responseDictionary = try NSJSONSerialization.JSONObjectWithData(self, options: .AllowFragments)
+        guard let jsonResponse = responseDictionary as? JSON else {
+            throw WitError.NotValidResponse(response: responseDictionary)
+        }
+        return jsonResponse
     }
-    return jsonResponse
 }
