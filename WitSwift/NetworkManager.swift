@@ -24,15 +24,15 @@ enum HTTPHeaderField: String {
 
 internal protocol RequestConstruction {
     associatedtype Request
-    static func constructRequest(url: NSURL, method: HTTPRequestMethod, params: [String: AnyObject]?, token: String) -> Request
+    static func constructRequest(_ url: URL, method: HTTPRequestMethod, params: [String: AnyObject]?, token: String) -> Request
 }
 
-internal final class NetworkManager: NSObject, NSURLSessionTaskDelegate {
-    let baseURL = NSURL(string: "https://api.wit.ai/")
+internal final class NetworkManager: NSObject, URLSessionTaskDelegate {
+    let baseURL = URL(string: "https://api.wit.ai/")
 
     static let sharedInstance : NetworkManager = {
-        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-        configuration.HTTPAdditionalHeaders = defaultHTTPHeaders
+        let configuration = URLSessionConfiguration.default()
+        configuration.httpAdditionalHeaders = defaultHTTPHeaders
         return NetworkManager(configuration: configuration)
     }()
 
@@ -41,89 +41,89 @@ internal final class NetworkManager: NSObject, NSURLSessionTaskDelegate {
         return [HTTPHeaderField.AcceptEncoding.rawValue: acceptEncoding, HTTPHeaderField.ContentType.rawValue: "application/json", HTTPHeaderField.AcceptType.rawValue: "application/json"]
     }()
 
-    let session: NSURLSession
+    let session: URLSession
     let delegate: NetworkDelegate
 
-    init(configuration: NSURLSessionConfiguration, delegate: NetworkDelegate = NetworkDelegate()) {
+    init(configuration: URLSessionConfiguration, delegate: NetworkDelegate = NetworkDelegate()) {
         self.delegate = delegate
-        session = NSURLSession(configuration: configuration, delegate: delegate, delegateQueue: nil)
+        session = URLSession(configuration: configuration, delegate: delegate, delegateQueue: nil)
     }
 
-    func execute(urlPath: String, HTTPMethod method: HTTPRequestMethod, params: [String: AnyObject]?, configuration: Configurable, completion: (( NSURLSessionTask?, NSData?, NSError?) ->Void)?)
+    func execute(_ urlPath: String, HTTPMethod method: HTTPRequestMethod, params: [String: AnyObject]?, configuration: Configurable, completion: (( URLSessionTask?, Data?, NSError?) ->Void)?)
     {
-        guard let url = NSURL(string: urlPath, relativeToURL: baseURL) else {
+        guard let url = URL(string: urlPath, relativeTo: baseURL!) else {
             completion?(nil, nil, nil)
             return
         }
 
-        let request = NSURLRequest.constructRequest(url, method: method, params: params, token: configuration.token)
-        let task = session.dataTaskWithRequest(request)
+        let request = URLRequest.constructRequest(url, method: method, params: params, token: configuration.token)
+        let task = session.dataTask(with: request)
         delegate[task] = TaskDelegate(task: task, completion: completion)
         task.resume()
     }
 }
 
-extension NSURLRequest : RequestConstruction {
-    typealias Request = NSURLRequest
+extension URLRequest : RequestConstruction {
+    typealias Request = URLRequest
     enum RequestQueryKey : String {
         case SessionID = "session_id"
         case UserQuery = "q"
         case Version = "v"
     }
 
-    static func constructRequest(url: NSURL, method: HTTPRequestMethod, params: [String: AnyObject]?, token: String) -> Request {
-        let request = NSMutableURLRequest(URL: url, cachePolicy: .UseProtocolCachePolicy, timeoutInterval: 60)
+    static func constructRequest(_ url: URL, method: HTTPRequestMethod, params: [String: AnyObject]?, token: String) -> Request {
+        let request = NSMutableURLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 60)
         request.setValue("Bearer \(token)", forHTTPHeaderField: HTTPHeaderField.Authentication.rawValue)
-        request.HTTPMethod = method.rawValue
+        request.httpMethod = method.rawValue
         guard let params = params else {
-            return request.copy() as! NSURLRequest
+            return request.copy() as! URLRequest
         }
         switch method {
         case .Get:
-            request.URL = encodeQuery(request.URL!, params: params)
+            request.url = encodeQuery(request.url!, params: params)
         case .Post, .Put, .Delete:
             var queries = [String: AnyObject]()
             var mutableParams = params
             if let sessionID = params[RequestQueryKey.SessionID.rawValue] {
                 queries[RequestQueryKey.SessionID.rawValue] = sessionID
-                mutableParams.removeValueForKey(RequestQueryKey.SessionID.rawValue)
+                mutableParams.removeValue(forKey: RequestQueryKey.SessionID.rawValue)
             }
             if let userQuery = params[RequestQueryKey.UserQuery.rawValue] {
                 queries[RequestQueryKey.UserQuery.rawValue] = userQuery
-                mutableParams.removeValueForKey(RequestQueryKey.UserQuery.rawValue)
+                mutableParams.removeValue(forKey: RequestQueryKey.UserQuery.rawValue)
             }
             if let version = params[RequestQueryKey.Version.rawValue] {
                 queries[RequestQueryKey.Version.rawValue] = version
-                mutableParams.removeValueForKey(RequestQueryKey.Version.rawValue)
+                mutableParams.removeValue(forKey: RequestQueryKey.Version.rawValue)
             }
-            request.URL = encodeQuery(request.URL!, params: queries)
-            guard let body = try? NSJSONSerialization.dataWithJSONObject(mutableParams, options: NSJSONWritingOptions()) else {
-                return request.copy() as! NSURLRequest
+            request.url = encodeQuery(request.url!, params: queries)
+            guard let body = try? JSONSerialization.data(withJSONObject: mutableParams, options: JSONSerialization.WritingOptions()) else {
+                return request.copy() as! URLRequest
             }
-            request.HTTPBody = body
+            request.httpBody = body
         }
 
-        return request.copy() as! NSURLRequest
+        return request.copy() as! URLRequest
     }
 
-    static func encodeQuery(url: NSURL, params: [String: AnyObject]) -> NSURL {
-        if let urlComponents = NSURLComponents(URL:url, resolvingAgainstBaseURL: false) where !params.isEmpty {
+    static func encodeQuery(_ url: URL, params: [String: AnyObject]) -> URL {
+        if let urlComponents = URLComponents(url:url, resolvingAgainstBaseURL: false) where !params.isEmpty {
             let encodedQuery = (urlComponents.percentEncodedQuery ?? "") + query(params)
             urlComponents.percentEncodedQuery = encodedQuery
-            return urlComponents.URL ?? url
+            return urlComponents.url ?? url
         }
         return url
     }
 
-    static func query(param: [String : AnyObject]) -> String {
+    static func query(_ param: [String : AnyObject]) -> String {
         var components = [(String, String)]()
         for (key, value) in param {
             components += buildComponents(key, value)
         }
-        return (components.map{"\($0)=\($1)"} as [String]).joinWithSeparator("&")
+        return (components.map{"\($0)=\($1)"} as [String]).joined(separator: "&")
     }
 
-    static func buildComponents(key: String, _ value: AnyObject) -> [(String, String)] {
+    static func buildComponents(_ key: String, _ value: AnyObject) -> [(String, String)] {
         var components = [(String, String)]()
         if let array = value as? [AnyObject] {
             for arrVal in array {
@@ -134,7 +134,7 @@ extension NSURLRequest : RequestConstruction {
                 components += buildComponents("\(key)[\(childKey)]", childValue)
             }
         } else {
-            components.append((key.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLPathAllowedCharacterSet()) ?? "", value as! String))
+            components.append((key.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed) ?? "", value as! String))
         }
         return components
     }

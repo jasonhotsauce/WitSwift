@@ -10,12 +10,12 @@ import Foundation
 
 public let witErrorDomain = "ai.Wit.error"
 
-private enum WitError : ErrorType {
-    case NotValidResponse(response: AnyObject)
+private enum WitError : ErrorProtocol {
+    case notValidResponse(response: AnyObject)
 
     func toNSError() -> NSError {
         switch self {
-        case .NotValidResponse(let response):
+        case .notValidResponse(let response):
             return NSError.init(domain: witErrorDomain, code: 1, userInfo: ["response": response])
         }
     }
@@ -23,7 +23,7 @@ private enum WitError : ErrorType {
 
 public typealias RequestCompletion = (Bool, Message?, NSError?) -> Void
 
-public func getIntent(configuration: Configurable, query: String, context: Contextable = Context(), messageID: String?, threadID: String?, numberOfOutcome outcome: Int = 1, completion: RequestCompletion?) {
+public func getIntent(_ configuration: Configurable, query: String, context: Contextable = Context(), messageID: String?, threadID: String?, numberOfOutcome outcome: Int = 1, completion: RequestCompletion?) {
     let path = "/message"
     var params = [String: AnyObject]()
     params["q"] = query
@@ -52,37 +52,37 @@ public func getIntent(configuration: Configurable, query: String, context: Conte
                     }
 
                     if let errorString = jsonResponse["error"] as? String {
-                        dispatch_async(dispatch_get_main_queue(), { 
+                        DispatchQueue.main.async(execute: { 
                             completion?(false, nil, NSError(domain: witErrorDomain, code: 2, userInfo: ["error": errorString]))
                         })
                         return
                     }
 
                     let message = try Message.init(json: jsonResponse)
-                    dispatch_async(dispatch_get_main_queue(), { 
+                    DispatchQueue.main.async(execute: { 
                         completion?(true, message, nil)
                     })
                 } catch let witError as WitError {
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         completion?(false, nil, witError.toNSError())
                     })
                 } catch let jsonError as JSONDecodingError {
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         completion?(false, nil, jsonError.toNSError())
                     })
                 } catch let error as NSError {
-                    dispatch_async(dispatch_get_main_queue(), { 
+                    DispatchQueue.main.async(execute: { 
                         completion?(false, nil, error);
                     })
                 }
             }
         })
     } catch let jsonEncodingError as JSONEncodingError {
-        dispatch_async(dispatch_get_main_queue(), { 
+        DispatchQueue.main.async(execute: { 
             completion?(false, nil, jsonEncodingError.toNSError())
         })
     } catch let error as NSError {
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             completion?(false, nil, error)
         })
     }
@@ -92,7 +92,7 @@ public typealias ConverseResponseHanlder = (Conversable) -> Contextable?
 public typealias ConverseRequestErrorHandler = (NSError) -> Void
 public var converseHandler : ConverseResponseHanlder?
 
-public func getConverse(configuration: Configurable, query: String?, sessionID: String, context: Contextable = Context(), maxStep: Double, requestErrorHandler: ConverseRequestErrorHandler?) {
+public func getConverse(_ configuration: Configurable, query: String?, sessionID: String, context: Contextable = Context(), maxStep: Double, requestErrorHandler: ConverseRequestErrorHandler?) {
     if maxStep <= 0 {
         return
     }
@@ -123,36 +123,36 @@ public func getConverse(configuration: Configurable, query: String?, sessionID: 
                     let newContext = converseHandler?(converse) ?? Context()
                     getConverse(configuration, query: nil, sessionID: sessionID, context: newContext, maxStep: maxStep-1, requestErrorHandler: requestErrorHandler)
                 } catch let witError as WitError {
-                    dispatch_async(dispatch_get_main_queue(), { 
+                    DispatchQueue.main.async(execute: { 
                         requestErrorHandler?(witError.toNSError())
                     })
                 } catch let jsonError as JSONDecodingError {
-                    dispatch_async(dispatch_get_main_queue(), { 
+                    DispatchQueue.main.async(execute: { 
                         requestErrorHandler?(jsonError.toNSError())
                     })
                 } catch let error as NSError {
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         requestErrorHandler?(error)
                     })
                 }
             }
         })
     } catch let encodingError as JSONEncodingError {
-        dispatch_async(dispatch_get_main_queue(), { 
+        DispatchQueue.main.async(execute: { 
             requestErrorHandler?(encodingError.toNSError())
         })
     } catch let error as NSError {
-        dispatch_async(dispatch_get_main_queue(), { 
+        DispatchQueue.main.async(execute: { 
             requestErrorHandler?(error)
         })
     }
 }
 
-extension NSData {
+extension Data {
     func toJson() throws -> JSON? {
-        let responseDictionary = try NSJSONSerialization.JSONObjectWithData(self, options: .AllowFragments)
+        let responseDictionary = try JSONSerialization.jsonObject(with: self, options: .allowFragments)
         guard let jsonResponse = responseDictionary as? JSON else {
-            throw WitError.NotValidResponse(response: responseDictionary)
+            throw WitError.notValidResponse(response: responseDictionary)
         }
         return jsonResponse
     }

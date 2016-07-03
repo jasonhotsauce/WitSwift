@@ -9,20 +9,20 @@
 import Foundation
 
 public struct JSONTransformer<EncodeType, DecodeType> {
-    var encode: DecodeType -> EncodeType
-    var decode: EncodeType -> DecodeType?
+    var encode: (DecodeType) -> EncodeType
+    var decode: (EncodeType) -> DecodeType?
 }
 
-private let dateFormatter: NSDateFormatter = {
-    let formatter = NSDateFormatter()
+private let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
     return formatter
 }()
 
-internal let dateTransformer = JSONTransformer(encode: { (date: NSDate) -> String in
-    return dateFormatter.stringFromDate(date)
-}) { (dateStr: String) -> NSDate? in
-        return dateFormatter.dateFromString(dateStr)
+internal let dateTransformer = JSONTransformer(encode: { (date: Date) -> String in
+    return dateFormatter.string(from: date)
+}) { (dateStr: String) -> Date? in
+        return dateFormatter.date(from: dateStr)
 }
 
-internal let urlTransformer = JSONTransformer<String, NSURL>(encode: {$0.absoluteString}, decode: {NSURL(string: $0)})
+internal let urlTransformer = JSONTransformer<String, URL>(encode: {$0.absoluteString!}, decode: {URL(string: $0)})

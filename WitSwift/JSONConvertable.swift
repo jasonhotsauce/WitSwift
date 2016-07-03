@@ -8,19 +8,19 @@
 
 import Foundation
 
-enum JSONEncodingError: ErrorType {
-    case ArrayIncompatible(elementType: Any.Type)
-    case DictionaryIncompatible(elementType: Any.Type)
-    case PropertyIncompatibleType(key: String, elementType: Any.Type)
+enum JSONEncodingError: ErrorProtocol {
+    case arrayIncompatible(elementType: Any.Type)
+    case dictionaryIncompatible(elementType: Any.Type)
+    case propertyIncompatibleType(key: String, elementType: Any.Type)
 
     func toNSError() -> NSError {
         let domain = "ai.wit.json.encodingError"
         switch self {
-        case .ArrayIncompatible(let elementType):
+        case .arrayIncompatible(let elementType):
             return NSError(domain: domain, code: 1, userInfo: ["elementType": String(elementType)])
-        case .DictionaryIncompatible(let elementType):
+        case .dictionaryIncompatible(let elementType):
             return NSError(domain: domain, code: 2, userInfo: ["elementType": String(elementType)])
-        case .PropertyIncompatibleType(let key, let elementType):
+        case .propertyIncompatibleType(let key, let elementType):
             return NSError(domain: domain, code: 3, userInfo: ["key": key, "elementType": String(elementType)])
         }
     }
@@ -52,7 +52,7 @@ extension Array : JSONArray {
 extension Array {
     func toJSON() throws -> [AnyObject] {
         guard elementIsJSONConvertable() else {
-            throw JSONEncodingError.ArrayIncompatible(elementType: Element.self)
+            throw JSONEncodingError.arrayIncompatible(elementType: Element.self)
         }
         var arr = [AnyObject]()
         for item in wrapped {
@@ -85,7 +85,7 @@ extension Dictionary : JSONDictionary {
 extension Dictionary {
     func toJSON() throws -> AnyObject {
         guard elementIsJSONConvertable() else {
-            throw JSONEncodingError.DictionaryIncompatible(elementType: Value.self)
+            throw JSONEncodingError.dictionaryIncompatible(elementType: Value.self)
         }
         let unwrapped = elementToJSONConvertable()
         var result:[String : AnyObject] = [:]
@@ -122,30 +122,30 @@ extension Bool : JSONPrimaryType {}
 public protocol JSONTransformable: JSONConvertable {
     associatedtype EncodeType
     associatedtype DecodeType
-    static func fromJSON(json: EncodeType) throws -> DecodeType?
+    static func fromJSON(_ json: EncodeType) throws -> DecodeType?
 }
 
-extension NSDate : JSONTransformable {
+extension Date : JSONTransformable {
     public func toJSON() throws -> AnyObject {
         return dateTransformer.encode(self)
     }
 
-    public static func fromJSON(json: String) throws -> NSDate? {
+    public static func fromJSON(_ json: String) throws -> Date? {
         guard let date = dateTransformer.decode(json) else {
-            throw JSONDecodingError.ValueNotTransformable(value: json)
+            throw JSONDecodingError.valueNotTransformable(value: json)
         }
         return date
     }
 }
 
-extension NSURL : JSONTransformable {
+extension URL : JSONTransformable {
     public func toJSON() throws -> AnyObject {
         return urlTransformer.encode(self)
     }
 
-    public static func fromJSON(json: String) throws -> NSURL? {
+    public static func fromJSON(_ json: String) throws -> URL? {
         guard let url = urlTransformer.decode(json) else {
-            throw JSONDecodingError.ValueNotTransformable(value: json)
+            throw JSONDecodingError.valueNotTransformable(value: json)
         }
         return url
     }
@@ -174,7 +174,7 @@ public extension JSONConvertable {
             case let value as JSONDictionary:
                 dic[key] = try value.elementToJSONConvertable().toJSON()
             default:
-                throw JSONEncodingError.PropertyIncompatibleType(key: key, elementType: valueMaybe.dynamicType)
+                throw JSONEncodingError.propertyIncompatibleType(key: key, elementType: valueMaybe.dynamicType)
             }
         }
         return dic

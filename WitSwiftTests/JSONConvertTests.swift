@@ -14,10 +14,10 @@ struct TestParent : JSONConvertable, JSONDecodable {
     var name: String
     var children: [TestChild]
     var phones: [String: String]
-    var birthday: NSDate
-    var profilePage: NSURL
+    var birthday: Date
+    var profilePage: URL
 
-    init(age: Int, name: String, children:[TestChild], phones: [String: String], birthday: NSDate, profilePage: NSURL) {
+    init(age: Int, name: String, children:[TestChild], phones: [String: String], birthday: Date, profilePage: URL) {
         self.age = age;
         self.name = name;
         self.children = children
@@ -40,9 +40,9 @@ struct TestParent : JSONConvertable, JSONDecodable {
 struct TestChild : JSONConvertable, JSONDecodable {
     var childName: String
     var childAge: Int
-    var birthday: NSDate
+    var birthday: Date
 
-    init(childName: String, childAge: Int, birthday: NSDate) {
+    init(childName: String, childAge: Int, birthday: Date) {
         self.childName = childName
         self.childAge = childAge
         self.birthday = birthday
@@ -58,7 +58,7 @@ struct TestChild : JSONConvertable, JSONDecodable {
 
 extension TestChild : Equatable {}
 func ==(l: TestChild, r: TestChild) -> Bool {
-    return l.childAge == r.childAge && l.childName == r.childName && l.birthday.isEqualToDate(r.birthday)
+    return l.childAge == r.childAge && l.childName == r.childName && (l.birthday == r.birthday)
 }
 
 class JSONConvertTests: XCTestCase {
@@ -67,9 +67,9 @@ class JSONConvertTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        let child1 = TestChild(childName: "John", childAge: 10, birthday: NSDate(timeIntervalSince1970: 1146582302))
-        let child2 = TestChild(childName: "Joey", childAge: 11, birthday: NSDate(timeIntervalSince1970: 1115046302))
-        parent = TestParent(age: 35, name: "Mason", children: [child1, child2], phones: ["home":"1233211234", "mobile": "4155678901"], birthday: NSDate(timeIntervalSince1970: 357663902), profilePage: NSURL(string: "http://test.com")!)
+        let child1 = TestChild(childName: "John", childAge: 10, birthday: Date(timeIntervalSince1970: 1146582302))
+        let child2 = TestChild(childName: "Joey", childAge: 11, birthday: Date(timeIntervalSince1970: 1115046302))
+        parent = TestParent(age: 35, name: "Mason", children: [child1, child2], phones: ["home":"1233211234", "mobile": "4155678901"], birthday: Date(timeIntervalSince1970: 357663902), profilePage: URL(string: "http://test.com")!)
     }
     
     override func tearDown() {
@@ -100,7 +100,7 @@ class JSONConvertTests: XCTestCase {
         XCTAssertEqual(parent.age, 35)
         XCTAssertEqual(parent.children.count, 2)
         let child = parent.children.first!
-        let expected = TestChild(childName: "John", childAge: 10, birthday: NSDate(timeIntervalSince1970: 1146582302))
+        let expected = TestChild(childName: "John", childAge: 10, birthday: Date(timeIntervalSince1970: 1146582302))
         XCTAssertEqual(child, expected)
     }
 

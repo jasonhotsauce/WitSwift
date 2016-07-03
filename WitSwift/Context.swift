@@ -20,7 +20,7 @@ public protocol EntityLike : JSONConvertable {
 
 public protocol Contextable : JSONConvertable {
     var state : [String]? {get}
-    var referenceTime : NSDate? {get}
+    var referenceTime : Date? {get}
     var timezone: String? {get}
     var location: LocationLike? {get}
     var entities: [EntityLike]? {get set}
@@ -32,12 +32,12 @@ internal struct Context: Contextable {
         return nil
     }
 
-    var referenceTime: NSDate? {
-        return NSDate()
+    var referenceTime: Date? {
+        return Date()
     }
 
     var timezone: String? {
-        return NSTimeZone.localTimeZone().name
+        return TimeZone.local().name
     }
 
     var location: LocationLike? {

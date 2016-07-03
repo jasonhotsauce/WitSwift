@@ -9,25 +9,25 @@
 import Foundation
 public typealias JSON = [String: AnyObject]
 
-enum JSONDecodingError: ErrorType {
-    case ArrayNotDecodable(elementType: Any.Type)
-    case DictionaryNotDecodable(elementType: Any.Type)
-    case PropertyNotDecodable(elementType: Any.Type)
-    case KeyMissing(key: String)
-    case ValueNotTransformable(value: Any)
+enum JSONDecodingError: ErrorProtocol {
+    case arrayNotDecodable(elementType: Any.Type)
+    case dictionaryNotDecodable(elementType: Any.Type)
+    case propertyNotDecodable(elementType: Any.Type)
+    case keyMissing(key: String)
+    case valueNotTransformable(value: Any)
 
     func toNSError() -> NSError {
         let domain = "ai.wit.json.decodeError"
         switch self {
-        case .ArrayNotDecodable(let elementType):
+        case .arrayNotDecodable(let elementType):
             return NSError(domain: domain, code: 1, userInfo: ["elementType": String(elementType)])
-        case .DictionaryNotDecodable(let elementType):
+        case .dictionaryNotDecodable(let elementType):
             return NSError(domain: domain, code: 2, userInfo: ["elementType": String(elementType)])
-        case .PropertyNotDecodable(let elementType):
+        case .propertyNotDecodable(let elementType):
             return NSError(domain: domain, code: 3, userInfo: ["elementType": String(elementType)])
-        case .KeyMissing(let key):
+        case .keyMissing(let key):
             return NSError(domain: domain, code: 4, userInfo: ["key": key])
-        case .ValueNotTransformable(let value):
+        case .valueNotTransformable(let value):
             return NSError(domain: domain, code: 5, userInfo: ["value": String(value)])
         }
     }
@@ -41,7 +41,7 @@ extension Array where Element : JSONDecodable {
     init(json: [AnyObject]) throws {
         self.init(try json.flatMap{
             guard let jsonEle = $0 as? JSON else {
-                throw JSONDecodingError.ArrayNotDecodable(elementType: $0.dynamicType)
+                throw JSONDecodingError.arrayNotDecodable(elementType: $0.dynamicType)
             }
             return try Element(json: jsonEle)
             })
@@ -51,82 +51,82 @@ extension Array where Element : JSONDecodable {
 public struct JSONDecoder {
     var json: JSON
 
-    func decode<Primary: JSONPrimaryType>(key: String) throws -> Primary {
+    func decode<Primary: JSONPrimaryType>(_ key: String) throws -> Primary {
         guard let value = json[key] else {
-            throw JSONDecodingError.KeyMissing(key: key)
+            throw JSONDecodingError.keyMissing(key: key)
         }
         guard let result = value as? Primary else {
-            throw JSONDecodingError.PropertyNotDecodable(elementType: value.dynamicType)
+            throw JSONDecodingError.propertyNotDecodable(elementType: value.dynamicType)
         }
         return result
     }
 
-    func decode<Primary: JSONPrimaryType>(key: String) -> Primary? {
+    func decode<Primary: JSONPrimaryType>(_ key: String) -> Primary? {
         return json[key] as? Primary
     }
 
-    func decode<T: JSONDecodable>(key: String) throws -> T {
+    func decode<T: JSONDecodable>(_ key: String) throws -> T {
         guard let value = json[key] else {
-            throw JSONDecodingError.KeyMissing(key: key)
+            throw JSONDecodingError.keyMissing(key: key)
         }
         guard let result = value as? T else {
-            throw JSONDecodingError.PropertyNotDecodable(elementType: value.dynamicType)
+            throw JSONDecodingError.propertyNotDecodable(elementType: value.dynamicType)
         }
         return result
     }
 
-    func decode<Element: JSONPrimaryType>(key: String) throws -> [Element] {
+    func decode<Element: JSONPrimaryType>(_ key: String) throws -> [Element] {
         guard let value = json[key] else {
-            throw JSONDecodingError.KeyMissing(key: key)
+            throw JSONDecodingError.keyMissing(key: key)
         }
         guard let result = value as? [Element] else {
-            throw JSONDecodingError.ArrayNotDecodable(elementType: value.dynamicType)
+            throw JSONDecodingError.arrayNotDecodable(elementType: value.dynamicType)
         }
         return result
     }
 
-    func decode<Element: JSONDecodable>(key: String) throws -> [Element] {
+    func decode<Element: JSONDecodable>(_ key: String) throws -> [Element] {
         guard let value = json[key] else {
-            throw JSONDecodingError.KeyMissing(key: key)
+            throw JSONDecodingError.keyMissing(key: key)
         }
         guard let result = value as? [JSON] else {
-            throw JSONDecodingError.ArrayNotDecodable(elementType: value.dynamicType)
+            throw JSONDecodingError.arrayNotDecodable(elementType: value.dynamicType)
         }
         return try result.flatMap{try Element(json: $0)}
     }
 
-    func decode<V: JSONPrimaryType>(key: String) throws -> [String: V] {
+    func decode<V: JSONPrimaryType>(_ key: String) throws -> [String: V] {
         guard let value = json[key] else {
-            throw JSONDecodingError.KeyMissing(key: key)
+            throw JSONDecodingError.keyMissing(key: key)
         }
 
         guard let result = value as? [String: V] else {
-            throw JSONDecodingError.DictionaryNotDecodable(elementType: value.dynamicType)
+            throw JSONDecodingError.dictionaryNotDecodable(elementType: value.dynamicType)
         }
         return result
     }
 
-    func decode<V: JSONDecodable>(key: String) throws -> [String: V] {
+    func decode<V: JSONDecodable>(_ key: String) throws -> [String: V] {
         guard let value = json[key] else {
-            throw JSONDecodingError.KeyMissing(key: key)
+            throw JSONDecodingError.keyMissing(key: key)
         }
         guard let dictionary = value as? [String: JSON] else {
-            throw JSONDecodingError.DictionaryNotDecodable(elementType: value.dynamicType)
+            throw JSONDecodingError.dictionaryNotDecodable(elementType: value.dynamicType)
         }
         var result = [String: V]()
         try dictionary.forEach{result[$0] = try V(json: $1)}
         return result
     }
 
-    func decode<EncodeType, DecodeType>(key: String, transformer: JSONTransformer<EncodeType, DecodeType>) throws -> DecodeType {
+    func decode<EncodeType, DecodeType>(_ key: String, transformer: JSONTransformer<EncodeType, DecodeType>) throws -> DecodeType {
         guard let value = json[key] else {
-            throw JSONDecodingError.KeyMissing(key: key)
+            throw JSONDecodingError.keyMissing(key: key)
         }
         guard let trans = value as? EncodeType else {
-            throw JSONDecodingError.ValueNotTransformable(value: value.dynamicType)
+            throw JSONDecodingError.valueNotTransformable(value: value.dynamicType)
         }
         guard let result = transformer.decode(trans) else {
-            throw JSONDecodingError.ValueNotTransformable(value: value.dynamicType)
+            throw JSONDecodingError.valueNotTransformable(value: value.dynamicType)
         }
         return result
     }
