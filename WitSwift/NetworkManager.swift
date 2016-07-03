@@ -107,7 +107,7 @@ extension URLRequest : RequestConstruction {
     }
 
     static func encodeQuery(_ url: URL, params: [String: AnyObject]) -> URL {
-        if let urlComponents = URLComponents(url:url, resolvingAgainstBaseURL: false) where !params.isEmpty {
+        if var urlComponents = URLComponents(url:url, resolvingAgainstBaseURL: false) where !params.isEmpty {
             let encodedQuery = (urlComponents.percentEncodedQuery ?? "") + query(params)
             urlComponents.percentEncodedQuery = encodedQuery
             return urlComponents.url ?? url

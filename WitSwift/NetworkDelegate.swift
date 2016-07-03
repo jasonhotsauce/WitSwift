@@ -15,13 +15,13 @@ internal class NetworkDelegate: NSObject, URLSessionDataDelegate {
     subscript(task: URLSessionTask) -> TaskDelegate? {
         get {
             var delegate: TaskDelegate?
-            sync Queue.sync { 
+            syncQueue.sync {
                 delegate = self.taskDelegates[task.taskIdentifier]
             }
             return delegate
         }
         set {
-            sync Queue.async { 
+            syncQueue.async {
                 self.taskDelegates[task.taskIdentifier] = newValue
             }
         }
