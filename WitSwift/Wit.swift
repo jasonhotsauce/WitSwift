@@ -10,7 +10,7 @@ import Foundation
 
 public let witErrorDomain = "ai.Wit.error"
 
-private enum WitError : ErrorProtocol {
+private enum WitError : ErrorProtocol, ErrorConvertable {
     case notValidResponse(response: AnyObject)
 
     func toNSError() -> NSError {

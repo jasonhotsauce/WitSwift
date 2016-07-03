@@ -21,6 +21,8 @@
 		B88326161CD8EEAD00CA391E /* JSONDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88326151CD8EEAD00CA391E /* JSONDecodable.swift */; };
 		B88326181CDBC9DD00CA391E /* JSONTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88326171CDBC9DD00CA391E /* JSONTransformer.swift */; };
 		B894FEE51CFC8EA400BAF024 /* Converse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B894FEE41CFC8EA400BAF024 /* Converse.swift */; };
+		B8DEBF661D298FDD00749A67 /* ErrorConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DEBF651D298FDD00749A67 /* ErrorConvertable.swift */; };
+		B8DEBF681D2991C600749A67 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DEBF671D2991C600749A67 /* NetworkRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		B88326151CD8EEAD00CA391E /* JSONDecodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONDecodable.swift; sourceTree = "<group>"; };
 		B88326171CDBC9DD00CA391E /* JSONTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONTransformer.swift; sourceTree = "<group>"; };
 		B894FEE41CFC8EA400BAF024 /* Converse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Converse.swift; sourceTree = "<group>"; };
+		B8DEBF651D298FDD00749A67 /* ErrorConvertable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorConvertable.swift; sourceTree = "<group>"; };
+		B8DEBF671D2991C600749A67 /* NetworkRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 				B883260A1CD1144400CA391E /* Wit.swift */,
 				B88325E91CCE6C5B00CA391E /* Info.plist */,
 				B88325FE1CCE6C6D00CA391E /* NetworkManager.swift */,
+				B8DEBF671D2991C600749A67 /* NetworkRequest.swift */,
 				B88326081CD10E1700CA391E /* NetworkDelegate.swift */,
 				B88326021CCE6E9500CA391E /* Configuration.swift */,
 				B88326041CCFB7CD00CA391E /* Context.swift */,
@@ -105,6 +110,7 @@
 				B88326171CDBC9DD00CA391E /* JSONTransformer.swift */,
 				B88326061CCFBBD700CA391E /* Message.swift */,
 				B894FEE41CFC8EA400BAF024 /* Converse.swift */,
+				B8DEBF651D298FDD00749A67 /* ErrorConvertable.swift */,
 			);
 			path = WitSwift;
 			sourceTree = "<group>";
@@ -231,6 +237,7 @@
 			files = (
 				B894FEE51CFC8EA400BAF024 /* Converse.swift in Sources */,
 				B883260B1CD1144400CA391E /* Wit.swift in Sources */,
+				B8DEBF661D298FDD00749A67 /* ErrorConvertable.swift in Sources */,
 				B88326031CCE6E9500CA391E /* Configuration.swift in Sources */,
 				B88326181CDBC9DD00CA391E /* JSONTransformer.swift in Sources */,
 				B88326051CCFB7CD00CA391E /* Context.swift in Sources */,
@@ -238,6 +245,7 @@
 				B88326091CD10E1700CA391E /* NetworkDelegate.swift in Sources */,
 				B88326111CD3AD8000CA391E /* JSONConvertable.swift in Sources */,
 				B88326161CD8EEAD00CA391E /* JSONDecodable.swift in Sources */,
+				B8DEBF681D2991C600749A67 /* NetworkRequest.swift in Sources */,
 				B88325FF1CCE6C6D00CA391E /* NetworkManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

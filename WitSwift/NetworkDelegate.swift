@@ -8,20 +8,23 @@
 
 import Foundation
 
-internal class NetworkDelegate: NSObject, URLSessionDataDelegate {
+internal class NetworkDelegate : NSObject, URLSessionDataDelegate {
     private let syncQueue = DispatchQueue(label: "wit.ai.networkdelegate.queue", attributes: DispatchQueueAttributes.concurrent)
     private var taskDelegates: [Int: TaskDelegate] = [:]
 
     subscript(task: URLSessionTask) -> TaskDelegate? {
         get {
             var delegate: TaskDelegate?
+            if #available(iOS 10, *) {
+                dispatchPrecondition(condition: .notOnQueue(syncQueue))
+            }
             syncQueue.sync {
                 delegate = self.taskDelegates[task.taskIdentifier]
             }
             return delegate
         }
         set {
-            syncQueue.async {
+            syncQueue.async(flags: .barrier) { 
                 self.taskDelegates[task.taskIdentifier] = newValue
             }
         }
@@ -33,35 +36,24 @@ internal class NetworkDelegate: NSObject, URLSessionDataDelegate {
 
     //MARK # Network delegate
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-        if let taskDelegate = self[dataTask] {
-            taskDelegate.urlSession(session, dataTask: dataTask, didReceive: data)
-        }
+        let taskDelegate = self[dataTask]
+        taskDelegate?.data.append(data)
     }
 
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: NSError?) {
-        if let taskDelegate = self[task] {
-            taskDelegate.urlSession(session, task: task, didCompleteWithError: error)
-        }
+        let taskDelegate = self[task]
+        taskDelegate?.completionHandler?(task, taskDelegate?.data, error)
     }
 }
 
-internal class TaskDelegate: NSObject, URLSessionDataDelegate {
+internal class TaskDelegate {
     typealias CompletionBlock = (URLSessionTask?, Data?, NSError?) -> Void
-    private var mutableData: NSMutableData
-    private var task: URLSessionTask
-    private var completionHandler: CompletionBlock?
+    internal var data: Data
+    internal let task: URLSessionTask
+    internal let completionHandler: CompletionBlock?
     init(task: URLSessionTask, completion: CompletionBlock?) {
-        mutableData = NSMutableData()
+        data = Data()
         self.task = task
         completionHandler = completion
-        super.init()
-    }
-
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-        mutableData.append(data)
-    }
-
-    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: NSError?) {
-        completionHandler?(task, mutableData as Data, error)
     }
 }

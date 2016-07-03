@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum JSONEncodingError: ErrorProtocol {
+enum JSONEncodingError: ErrorProtocol, ErrorConvertable {
     case arrayIncompatible(elementType: Any.Type)
     case dictionaryIncompatible(elementType: Any.Type)
     case propertyIncompatibleType(key: String, elementType: Any.Type)

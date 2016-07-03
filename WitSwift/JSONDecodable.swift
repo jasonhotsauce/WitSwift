@@ -9,7 +9,7 @@
 import Foundation
 public typealias JSON = [String: AnyObject]
 
-enum JSONDecodingError: ErrorProtocol {
+enum JSONDecodingError: ErrorProtocol, ErrorConvertable {
     case arrayNotDecodable(elementType: Any.Type)
     case dictionaryNotDecodable(elementType: Any.Type)
     case propertyNotDecodable(elementType: Any.Type)

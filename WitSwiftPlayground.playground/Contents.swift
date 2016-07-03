@@ -1,7 +1,7 @@
 //: Playground - noun: a place where people can play
 import WitSwift
-import XCPlayground
-XCPlaygroundPage.currentPage.needsIndefiniteExecution = true
+import PlaygroundSupport
+PlaygroundPage.current.needsIndefiniteExecution = true
 
 struct Configuration : Configurable {
     var token: String {
@@ -14,7 +14,7 @@ struct Configuration : Configurable {
 }
 
 let config = Configuration()
-let query = "What's the weather today"
+let query = "hello"
 
 converseHandler = { converse in
     switch converse.type {
@@ -37,7 +37,7 @@ converseHandler = { converse in
     }
 }
 
-let sessionID = NSUUID().UUIDString
-getConverse(config, query: "hello", sessionID: sessionID, maxStep: 5) { (error) in
+let sessionID = NSUUID().uuidString
+getConverse(config, query: query, sessionID: sessionID, maxStep: 5) { (error) in
     print(error)
 }
